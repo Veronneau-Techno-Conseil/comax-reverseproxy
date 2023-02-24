@@ -10,7 +10,7 @@ RUN dotnet restore
 
 # Copy everything else and build
 WORKDIR /src/ComaxRpOperator
-RUN dotnet publish -c Release -o ../out
+RUN dotnet publish ComaxRpOperator.csproj -o ../out
 WORKDIR /src/out
 
 # Build runtime image
