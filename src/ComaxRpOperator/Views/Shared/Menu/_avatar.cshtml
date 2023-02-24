@@ -1,0 +1,13 @@
+﻿@model byte[]
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if (Model != null)
+{
+    <img class="image is-32x32" style="object-fit: cover;" src="data:image/*;base64,@(Convert.ToBase64String(Model))"> }
+else
+{
+    <img class="image is-32x32" style="object-fit: cover;" src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" />
+}

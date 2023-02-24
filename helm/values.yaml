@@ -1,0 +1,101 @@
+# Default values for comax-orchestrator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: vertechcon/comax-reverseproxyui
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: "cxorch"
+fullnameOverride: ""
+pvcName: "orchdatastore"
+orch:
+  siloport: 7718
+  gatewayport: 30001
+
+urls: "http://*:8080"
+centralApiUrl: "https://central.api.com"
+oidc:
+  auth: "https://oidc.auth/"
+  scopes: "openid offline_access roles profile email"
+  clientId: ""
+  secret: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+advertisedIp: ""
+listeningEndpoint: ""
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 2000
+
+securityContext:
+  runAsNonRoot: true       
+  runAsUser: 1000
+  runAsGroup: 2000
+
+service:
+  type: LoadBalancer
+  ports:
+  - port: 30001
+    targetPort: 30001 
+    name: gateway
+  annotations:
+    metallb.universe.tf/address-pool: soempool
+    metallb.universe.tf/loadBalancerIPs: someip
+  loadBalancerClass: "metallb"
+
+ingress:
+  enabled: false
+  annotations: 
+    cert-manager.io/cluster-issuer: "vault-issuer"
+    ingress.kubernetes.io/protocol: https
+  hosts:
+    - host: host.domain.com
+      paths: 
+        - path: /
+  tls: 
+  - hosts:
+      - host.domain.com
+    secretName: "orchestratortls"
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
