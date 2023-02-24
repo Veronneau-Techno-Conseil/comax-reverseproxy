@@ -35,7 +35,8 @@ pipeline {
 
                     sh "docker buildx build --push -t vertechcon/comax-reverseproxyui:latest -t vertechcon/comax-reverseproxyui:${patch} --platform linux/amd64,linux/arm64 -f rpui.Dockerfile ."
 
-                    sh "docker buildx build --push -t vertechcon/comax-reverseproxyop:latest -t vertechcon/comax-reverseproxyop:${patch} --platform linux/amd64,linux/arm64 -f operator.Dockerfile ."                    
+                    sh "docker buildx build --push -t vertechcon/comax-reverseproxyop:latest -t vertechcon/comax-reverseproxyop:${patch} --platform linux/arm64 -f operator.Dockerfile ."                    
+                    sh "docker buildx build --push -t vertechcon/comax-reverseproxyop:latest -t vertechcon/comax-reverseproxyop:${patch} --platform linux/amd64 -f operator.Dockerfile ."                    
                 }
             }
 
