@@ -51,7 +51,7 @@ pipeline {
         stage('Prep Helm Reverse Proxy') {
             agent {
                 docker {
-                    image 'vertechcon/comax-pythonenv:3.9.16-bullseye'
+                    image 'vertechcon/comax-buildenv:3.9.16-bullseye'
                     reuseNode true
                 }
             }
@@ -65,6 +65,12 @@ pipeline {
             }
         }
         stage('Helm Reverse Proxy') {
+            agent {
+                docker {
+                    image 'vertechcon/comax-buildenv:3.9.16-bullseye'
+                    reuseNode true
+                }
+            }
             when{
                 expression {
                     return chartAction == "DEPLOY"
@@ -91,6 +97,12 @@ pipeline {
             }
         }
         stage('Prepare Application deployment Reverse Proxy') {
+            agent {
+                docker {
+                    image 'vertechcon/comax-buildenv:3.9.16-bullseye'
+                    reuseNode true
+                }
+            }
             when{
                 expression {
                     return env.BRANCH_NAME.startsWith('release')
@@ -115,6 +127,12 @@ pipeline {
             }
         }
         stage('Uninstall Application deployment Reverse Proxy') {
+            agent {
+                docker {
+                    image 'vertechcon/comax-buildenv:3.9.16-bullseye'
+                    reuseNode true
+                }
+            }
             when{
                 expression {
                     return env.BRANCH_NAME.startsWith('release') && shouldUninstall == 'uninstall'
@@ -127,6 +145,12 @@ pipeline {
             }
         }
         stage('Install Application deployment Reverse Proxy') {
+            agent {
+                docker {
+                    image 'vertechcon/comax-buildenv:3.9.16-bullseye'
+                    reuseNode true
+                }
+            }
             when{
                 expression {
                     return env.BRANCH_NAME.startsWith('release') && deployAction != "upgrade"
@@ -140,6 +164,12 @@ pipeline {
             }
         }
         stage('Upgrade Application deployment Reverse Proxy') {
+            agent {
+                docker {
+                    image 'vertechcon/comax-buildenv:3.9.16-bullseye'
+                    reuseNode true
+                }
+            }
             when{
                 expression {
                     return env.BRANCH_NAME.startsWith('release') && deployAction == "upgrade"
