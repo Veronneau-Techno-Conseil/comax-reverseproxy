@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "comax-orchestrator.fullname" . }}
+  name: {{ include "comax-rpui.fullname" . }}
   labels:
-    {{- include "comax-orchestrator.labels" . | nindent 4 }}
+    {{- include "comax-rpui.labels" . | nindent 4 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -11,14 +11,12 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-{{- range .Values.service.ports }}
-    - port: {{ .port }}
-      targetPort: {{ .targetPort }}
+    - port: {{ .Values.service.port }}
+      targetPort: 80
       protocol: TCP
-      name: {{ .name }}
-{{- end }}
+      name: http
   selector:
-    {{- include "comax-orchestrator.selectorLabels" . | nindent 4 }}
+    {{- include "comax-rpui.selectorLabels" . | nindent 4 }}
   {{- if .Values.service.loadBalancerClass }}
   loadBalancerClass: {{.Values.service.loadBalancerClass}}
   {{- end }}

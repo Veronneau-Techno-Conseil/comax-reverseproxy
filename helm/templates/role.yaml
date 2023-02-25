@@ -1,0 +1,13 @@
+{{- if .Values.serviceAccount.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: operator-ui-role
+rules:
+  - apiGroups:
+      - communaxiom.org
+    resources:
+      - reverseproxies
+    verbs:
+      - '*'
+{{- end }}
