@@ -49,9 +49,14 @@ pipeline {
             }
         }
         stage('Prep Helm Reverse Proxy') {
+            agent {
+                docker {
+                    image 'python:3.9.16-bullseye'
+                    reuseNode true
+                }
+            }
             steps {
-                sh 'mkdir penv && python3 -m venv ./penv'
-                sh '. penv/bin/activate && pwd && ls -l && pip install -r ./build/requirements.txt && python3 ./build/processchart.py'
+                sh 'pip install -r ./build/requirements.txt && python3 ./build/processchart.py'
                 sh 'curl -k https://charts.vtck3s.lan/api/charts/comax-reverseproxy/${chartVersion} | jq \'.name | "DEPLOY"\' > CHART_ACTION'
                 script {
                     chartAction = readFile('CHART_ACTION').replace('"','').trim()
