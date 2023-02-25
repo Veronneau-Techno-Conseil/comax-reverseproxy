@@ -56,7 +56,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install -r ./build/requirements.txt && python3 ./build/processchart.py'
+                sh 'mkdir penv && python3 -m venv ./penv'
+                sh '. penv/bin/activate && pwd && ls -l && pip install -r ./build/requirements.txt && python3 ./build/processchart.py'
                 sh 'curl -k https://charts.vtck3s.lan/api/charts/comax-reverseproxy/${chartVersion} | jq \'.name | "DEPLOY"\' > CHART_ACTION'
                 script {
                     chartAction = readFile('CHART_ACTION').replace('"','').trim()
