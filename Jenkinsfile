@@ -51,7 +51,7 @@ pipeline {
         stage('Prep Helm Reverse Proxy') {
             agent {
                 docker {
-                    image 'python:3.9.16-bullseye'
+                    image 'vertechcon/comax-pythonenv:3.9.16-bullseye'
                     reuseNode true
                 }
             }
