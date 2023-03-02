@@ -1,0 +1,27 @@
+{
+  "name": "reverseproxy.components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx gulp && node browserify.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vertechcon/comax-styles": "^1.0.0",
+    "browserify": "^17.0.0",
+    "bulma": "^0.9.3",
+    "fs": "^0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "jquery": "^3.6.0",
+    "select-picker": "^0.3.2",
+    "tsify": "^5.0.4"
+  },
+  "devDependencies": {
+    "sass": "^1.52.0"
+  }
+}

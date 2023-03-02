@@ -1,5 +1,6 @@
 ﻿using CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Builder;
 using CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Entities;
+using CommunAxiom.DotnetSdk.Helpers;
 using IdentityModel;
 using k8s;
 using k8s.Models;
@@ -18,11 +19,14 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1
     [EntityRbac(typeof(V1ServiceAccount), Verbs = RbacVerb.All)]
     public class ReverseProxyController : BaseController<ReverseProxy, ReverseProxySpec, ReverseProxyState>, IResourceController<ReverseProxy>
     {
-        
-        public ReverseProxyController(ILogger<ReverseProxyController> logger, IFinalizerManager<ReverseProxy> finalizeManager, IKubernetesClient client):
+        private readonly IConfiguration _configuration;
+        private readonly IServiceProvider _serviceProvider;
+
+        public ReverseProxyController(ILogger<ReverseProxyController> logger, IFinalizerManager<ReverseProxy> finalizeManager, IKubernetesClient client, IConfiguration configuration, IServiceProvider serviceProvider):
             base(logger, finalizeManager, client)
         {
-            
+            _configuration = configuration;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task<ResourceControllerResult?> ReconcileAsync(ReverseProxy entity)
@@ -100,7 +104,7 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1
 
         protected override IEnumerable<IKubernetesObject<V1ObjectMeta>> GetWorkload(ReverseProxy entity)
         {
-            return Builder.DeploymentBuilder.Build(entity);
+            return Builder.DeploymentBuilder.Build(entity, _configuration, _serviceProvider);
         }
 
 
@@ -117,9 +121,12 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1
         //     A task that completes, when the reconciliation is done.
         public override async Task DeletedAsync(ReverseProxy entity)
         {
-            await _client.DeleteObject<V1Service>(_logger, entity.Namespace(), $"{entity.GetDeploymentName()}-ep");
-
-            await _client.DeleteObject<V1Deployment>(_logger, entity.Namespace(), entity.GetDeploymentName());
+            
+            await _client.Try(c => c.DeleteObject<V1Ingress>(_logger, entity.Namespace(), entity.GetIngressName()));
+            await _client.Try(c => c.DeleteObject<V1Secret>(_logger, entity.Namespace(), entity.Spec.IngressCertSecret));
+            await _client.Try(c => c.DeleteObject<V1Service>(_logger, entity.Namespace(), entity.GetServiceName()));
+            await _client.Try(c => c.DeleteObject<V1Deployment>(_logger, entity.Namespace(), entity.GetDeploymentName()));
+            await _client.Try(c => c.DeleteObject<V1ConfigMap>(_logger, entity.Namespace(), entity.GetConfigName()));
 
             _logger.LogInformation(
                 "{Name} in namespace {Namespace} deleted",

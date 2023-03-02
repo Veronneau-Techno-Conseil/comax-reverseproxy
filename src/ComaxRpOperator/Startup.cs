@@ -1,8 +1,9 @@
 ﻿
-using ComaxRpOperator.Models;
 using CommunAxiom.Commons.Client.Hosting.Operator.Services;
 using CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1;
 using CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Entities;
+using CommunAxiom.DotnetSdk.Helpers;
+using CommunAxiom.DotnetSdk.Helpers.OIDC;
 using k8s.Models;
 using KubeOps.KubernetesClient;
 //using CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Entities;
@@ -28,7 +29,7 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator
             OIDCSettings oIDCSettings = new OIDCSettings();
             _configuration.GetSection("OIDC").Bind(oIDCSettings);
             services.AddTransient(x => oIDCSettings);
-
+            services.SetupHelpers();
             services.AddLogging(builder =>
             {
                 builder.ClearProviders();

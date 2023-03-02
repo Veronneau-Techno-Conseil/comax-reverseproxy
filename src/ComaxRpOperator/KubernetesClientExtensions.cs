@@ -1,6 +1,7 @@
 ﻿
 
 using CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Entities;
+using CommunAxiom.DotnetSdk.Helpers;
 using IdentityModel;
 using k8s;
 using k8s.Models;
@@ -36,7 +37,8 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator
                     }
                     else
                     {
-                        ((dynamic)o).Spec = ((dynamic)obj).Spec;
+                        o.Try(x => ((dynamic)o).Spec = ((dynamic)obj).Spec);
+                        o.Try(x => ((dynamic)o).Data = ((dynamic)obj).Data);
                         return (IKubernetesObject<V1ObjectMeta>)await cl.Update<T>(o);
                     }
                     throw new InvalidOperationException("Cannot assign spec");

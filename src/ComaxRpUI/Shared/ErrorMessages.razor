@@ -1,0 +1,12 @@
+﻿@if (Messages != null)
+{
+    foreach (var err in Messages)
+    {
+        <span class="help is-danger">@err</span>
+    }
+}
+
+@code {
+    [Parameter]
+    public string[] Messages { get; set; }
+}

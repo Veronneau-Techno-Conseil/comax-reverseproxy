@@ -1,39 +1,76 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">ComaxRpUI</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+﻿@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<NavMenu> _localizer
+
+<nav class="navbar is-white" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <NavLink class="navbar-item" href="/">
+                <img src="/Icons/ReverseProxy.png" />
+                <strong>@_localizer["Reverse Proxy"]</strong>
+            </NavLink>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenuIndex">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navMenuIndex" class="navbar-menu">
+            <div class="navbar-start">
+                @*<AuthorizeView>
+                    <Authorized>
+                        <NavLink class="navbar-item" href="dashboard" Match="NavLinkMatch.All">
+                            <img class="icon-25" src="/Icons/Home.png" />
+                            @_localizer["Dashboard"]
+                        </NavLink>
+                    </Authorized>
+                </AuthorizeView>*@
+                <NavLink class="navbar-item" href="" Match="NavLinkMatch.All">
+                            <img class="icon-25" src="/Icons/Home.png" />
+                            @_localizer["Manager"]
+                </NavLink>
+
+                <NavLink class="navbar-item" href="about" Match="NavLinkMatch.All">
+                    <img class="icon-25" src="_content/ClientUI.Components/icons/Commons.png" />
+                    @_localizer["About"]
+                </NavLink>
+            </div>
+
+            <div class="navbar-end">
+               @* <AuthorizeView>
+                    <Authorized>
+                        <span class="navbar-item">
+                            @User?.Name
+                        </span>
+
+                        <span id="criticalNotifications" class="navbar-item">
+                            <div class='ikrNoti_Counter'>@criticalNotifications.Count()</div>
+                            <div class='ikrNoti_Button' style="background: #2E467C" @onclick="HideShowNotifications"></div>
+                            <div class='ikrNotifications' style="display:@notificationsBox !important" @onclick=HideShowNotifications>
+                                <h3>Critical Notifications (<span class='notiCounterOnHead'> @criticalNotifications.Count() </span>)</h3>
+                                <div>
+                                    @foreach (var notification in criticalNotifications)
+                                    {
+                                        <div>
+                                            <h4>@notification</h4>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </span>
+
+                        <a class="navbar-item" @onclick="Logout">
+                            <img alt="Log off" class="image is-32x32" src="https://djp65hxq6jm81.cloudfront.net/uploads/735de877-33df-42ce-a423-af091d396e7c/Logout.png" />
+                        </a>
+                    </Authorized>
+                    <NotAuthorized>
+                        <NavLink class="navbar-item" href="login" Match="NavLinkMatch.All">
+                            @_localizer["Log in"]
+                        </NavLink>
+                    </NotAuthorized>
+                </AuthorizeView>*@
+            </div>
+        </div>
     </div>
-</div>
+</nav>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}

@@ -1,0 +1,135 @@
+﻿@import "../../node_modules/@vertechcon/comax-styles/src/styles/index.scss";
+
+
+.h-100 {
+  display: grid;
+  flex-direction: row;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  margin: 8px;
+}
+
+.scrollbar {
+  height: 312px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.scrollbar-2 {
+  height: 700px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #fff7eb !important; /* color of the tracking area */
+  border: 1px solid #4dc981 !important;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #dad4a4 !important;
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 2px solid #4dc981 !important;
+}
+
+.scrollbar-2::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+.scrollbar-2::-webkit-scrollbar-track {
+  background: #fff7eb !important; /* color of the tracking area */
+  border: 1px solid #4dc981 !important;
+}
+
+.scrollbar-2::-webkit-scrollbar-thumb {
+  background-color: #dad4a4 !important;
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 2px solid #4dc981 !important;
+}
+
+.tree-view-title {
+  margin-bottom: 10px !important;
+}
+
+.tree-view-icon {
+  top: 4px;
+  position: relative;
+}
+
+.icon-pos {
+  position: relative;
+  top: -2px;
+}
+
+.icon-25 {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  top: 2px;
+}
+
+.icon-15 {
+  width: 15px;
+  height: 15px;
+}
+
+.tabs li {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: #239854;
+}
+
+.tabs li.is-active a {
+  background-color: #4dc981;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  color: #2b4855 !important;
+}
+
+.tabs {
+  margin: 0px !important;
+}
+
+.content ul {
+  margin: 0px;
+}
+
+.tab-content {
+  border: 1.5px solid #4DC981;
+  padding: 6px;
+}
+
+.modal-card-foot, .modal-card-head {
+  padding: 10px !important;
+}
+
+.content h4 {
+  margin-bottom: 0px !important;
+}
+
+.select select {
+  border: 1px solid #4dc981;
+}
+
+.text-input {
+  border: 1px solid #4DC981;
+}
+
+.img-down {
+  transform: rotate(180deg);
+  -ms-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(270deg);
+}
+
+.list-group-item {
+  border: 1px solid #4DC981 !important;
+}

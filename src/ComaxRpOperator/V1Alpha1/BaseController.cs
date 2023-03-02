@@ -50,6 +50,7 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1
                 entity.Namespace()
             );
 
+
             await DeletedAsync(entity);
 
             _logger.LogInformation(

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComaxRpOperator", "ComaxRpOperator\ComaxRpOperator.csproj", "{47083E35-6DB7-4CF9-B3B7-D405D5DB1E35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComaxRpUI", "ComaxRpUI\ComaxRpUI.csproj", "{B047D8B7-92F7-4437-8705-485130FC5351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComaxRpUI", "ComaxRpUI\ComaxRpUI.csproj", "{B047D8B7-92F7-4437-8705-485130FC5351}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralClient", "RpContracts\CentralClient.csproj", "{516DCC22-200D-4DF0-8C2D-5AE1A6E7BF5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B047D8B7-92F7-4437-8705-485130FC5351}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B047D8B7-92F7-4437-8705-485130FC5351}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B047D8B7-92F7-4437-8705-485130FC5351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{516DCC22-200D-4DF0-8C2D-5AE1A6E7BF5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516DCC22-200D-4DF0-8C2D-5AE1A6E7BF5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516DCC22-200D-4DF0-8C2D-5AE1A6E7BF5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516DCC22-200D-4DF0-8C2D-5AE1A6E7BF5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

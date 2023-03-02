@@ -39,6 +39,16 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Entities
         {
             return $"{agentReferee.GetDeploymentName()}-ep";
         }
+        
+        public static string GetNginxSecretName(this ReverseProxy agentReferee)
+        {
+            return $"{agentReferee.GetDeploymentName()}-crts";
+        }
+
+        public static string GetIngrSecretName(this ReverseProxy agentReferee)
+        {
+            return $"{agentReferee.GetDeploymentName()}-tls";
+        }
 
         public static string GetConfigName(this ReverseProxy agentReferee)
         {
@@ -48,6 +58,11 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Entities
         public static string GetServiceAccountName(this ReverseProxy agentReferee)
         {
             return $"{agentReferee.GetDeploymentName()}-sa";
+        }
+
+        public static string GetIngressName(this ReverseProxy agentReferee)
+        {
+            return $"{agentReferee.GetDeploymentName()}-ingr";
         }
     }
 

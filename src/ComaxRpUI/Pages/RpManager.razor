@@ -1,0 +1,145 @@
+﻿@page "/manager"
+@page "/"
+
+@using Blazorise.Bulma
+@using ComaxRpUI.Models;
+@using Microsoft.Extensions.Localization;
+@using Blazorise.DataGrid
+@layout MainLayout
+@inject IStringLocalizer<RpManager> _localizer
+
+<PageTitle>@_localizer["title"]</PageTitle>
+
+<DataGrid TItem="RpEntryVm"
+          @ref="Grid"
+          Filterable="true"
+          FilterMethod="DataGridFilterMethod.Contains"
+          ShowPager="true"
+          ShowPageSizes="true"
+          Editable="true"
+          Striped="true"
+          Hoverable="true"
+          Responsive="true"
+          SelectedRowChanged="OnSelectedRowChanged"
+          ReadData="@OnReadData"
+          EditMode="DataGridEditMode.Inline"
+          RowUpdating="@OnRowUpdated"
+          RowInserting="@OnRowUpdated"
+          RowRemoving="@OnRowRemoved"
+          Data="@Items">
+    <ChildContent>
+        <DataGridColumn TItem="RpEntryVm" Field="Id" Sortable="false" Displayable="false"></DataGridColumn>
+        <DataGridColumn TItem="RpEntryVm" Editable Field="Name" Sortable="true" Displayable="true" Caption="@_localizer["Name"]">
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <TextEdit Text="@(context.CellValue?.ToString())" TextChanged="@(v=>context.CellValue=v)" Class="input is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.Name)"></ErrorMessages>
+                            </Feedback>
+                        </TextEdit>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridColumn TItem="RpEntryVm" Editable Field="IngressHost" Sortable="true" Displayable="true" Caption="@_localizer["IngressHost"]">
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <TextEdit Text="@(context.CellValue?.ToString())" TextChanged="@(v=>context.CellValue=v)" Class="input is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.IngressHost)"></ErrorMessages>
+                            </Feedback>
+                        </TextEdit>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridColumn TItem="RpEntryVm" Editable Field="ForwardAddress" Sortable="true" Displayable="true" Caption="@_localizer["ForwardAddress"]">
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <TextEdit Text="@(context.CellValue?.ToString())" TextChanged="@(v=>context.CellValue=v)" Class="input is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.ForwardAddress)"></ErrorMessages>
+                            </Feedback>
+                        </TextEdit>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridColumn TItem="RpEntryVm" Editable Field="IngressCertManager" Sortable="true" Displayable="true" Caption="@_localizer["IngressCertManager"]">
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <TextEdit Text="@(context.CellValue?.ToString())" TextChanged="@(v=>context.CellValue=v)" Class="input is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.IngressCertManager)"></ErrorMessages>
+                            </Feedback>
+                        </TextEdit>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridColumn TItem="RpEntryVm" Editable Field="IngressCertSecret" Sortable="true" Displayable="true" Caption="@_localizer["IngressCertSecret"]">
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <TextEdit Text="@(context.CellValue?.ToString())" TextChanged="@(v=>context.CellValue=v)" Class="input is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.IngressCertSecret)"></ErrorMessages>
+                            </Feedback>
+                        </TextEdit>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridCheckColumn TItem="RpEntryVm" Editable Field="UseHttps" Sortable="true" Displayable="true" Caption="@_localizer["UseHttps"]">
+            <DisplayTemplate>
+                @{
+                    <div class="field">
+                        <Switch TValue="bool" Checked="@((bool)context.UseHttps)" Disabled="true" Class="is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.UseHttps)"></ErrorMessages>
+                            </Feedback>
+                        </Switch>
+                    </div>
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <Switch TValue="bool" Checked="@((bool)context.CellValue)" CheckedChanged="@(v=>context.CellValue=v)" Class="is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.UseHttps)"></ErrorMessages>
+                            </Feedback>
+                        </Switch>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridCheckColumn>
+        <DataGridCheckColumn TItem="RpEntryVm" Editable Field="Active" Sortable="true" Displayable="true" Caption="@_localizer["Active"]">
+            <EditTemplate>
+                @{
+                    <div class="field">
+                        <Switch TValue="bool" Checked="@((bool)context.CellValue)" CheckedChanged="@(v=>context.CellValue=v)" Class="is-primary">
+                            <Feedback>
+                                <ErrorMessages Messages="@(Errors.Active)"></ErrorMessages>
+                            </Feedback>
+                        </Switch>
+                    </div>
+                }
+            </EditTemplate>
+        </DataGridCheckColumn>
+        <DataGridCheckColumn TItem="RpEntryVm" Editable="false" Field="Managed" Sortable="true" Displayable="true" Caption="@_localizer["Managed"]">
+        </DataGridCheckColumn>
+        <DataGridCommandColumn TItem="RpEntryVm">
+            <EditCommandTemplate>
+                <Button Active="@(!context.Item.Managed)" Disabled="context.Item.Managed" Clicked="@(context.Clicked)" class="button is-primary">Edit</Button>
+            </EditCommandTemplate>
+            <DeleteCommandTemplate>
+                <Button Active="@(!context.Item.Managed)" Disabled="context.Item.Managed" Clicked="@(context.Clicked)" class="button is-primary">Delete</Button>
+            </DeleteCommandTemplate>
+        </DataGridCommandColumn>
+    </ChildContent>
+</DataGrid>
