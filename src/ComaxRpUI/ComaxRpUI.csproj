@@ -39,7 +39,7 @@
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Json.Newtonsoft" Version="7.0.0" />
 		<PackageReference Include="Docker.DotNet" Version="3.125.12" />
 		<PackageReference Include="Blazored.Toast" Version="3.2.2" />
-		<PackageReference Include="CommunAxiom.DotnetSdk.Helpers" Version="0.0.5" />
+		<PackageReference Include="CommunAxiom.DotnetSdk.Helpers" Version="0.0.6" />
 
 	</ItemGroup>
 
