@@ -19,7 +19,8 @@ There are two applications that can be run.
 - Comax RP UI
     1. Make sure OIDC settings are set to a working Accounts server with valid clientid / secrets
     2. Make sure that CentralUrl points to a valid target
-    3. Db configurations can be left at default but you should ensure that they are identical to those of Rp Operator as both application needs to access the same isntance of the database. 
+    3. To test the automated RP, ensure that you use valid fwd addresses and ingress template including [HASH] in the proper location
+    4. Db configurations can be left at default but you should ensure that they are identical to those of Rp Operator as both application needs to access the same isntance of the database. 
 - Comax RP Operator
     1. Make sure OIDC settings are set to a working Accounts server with valid clientid / secrets
     2. Make sure that CentralUrl points to a valid target
