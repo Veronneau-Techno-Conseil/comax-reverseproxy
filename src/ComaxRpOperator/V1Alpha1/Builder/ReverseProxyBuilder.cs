@@ -202,7 +202,7 @@ namespace CommunAxiom.Commons.Client.Hosting.Operator.V1Alpha1.Builder
             envVariables.Add(new("PROXY_SSL_CERT", "/etc/ssl/private/priv.pem"));
             envVariables.Add(new("PROXY_SSL_CERT_KEY", "/etc/ssl/private/priv.key"));
             envVariables.Add(new("server_name", resource.Spec.ForwardAddress));
-            envVariables.Add(new("proxy_dns", configuration["DSN"]));
+            envVariables.Add(new("proxy_dns", configuration["DNS"]));
 
             var container = new V1Container
             {

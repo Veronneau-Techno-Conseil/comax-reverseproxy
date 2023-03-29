@@ -12,7 +12,7 @@ namespace ComaxRpOperator.V1Alpha1.Builder
         public static dynamic BuildObject(IConfiguration configuration, ReverseProxy entity)
         {
             var ex = (dynamic)new ExpandoObject();
-            ex.proxy_dns = configuration["DSN"];
+            ex.proxy_dns = configuration["DNS"];
             ex.server_name = entity.GetDeploymentName().TrimEnd('/');
             ex.upstream = entity.Spec.ForwardAddress.TrimEnd('/');
             return ex;
