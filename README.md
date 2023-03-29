@@ -24,3 +24,5 @@ There are two applications that can be run.
     1. Make sure OIDC settings are set to a working Accounts server with valid clientid / secrets
     2. Make sure that CentralUrl points to a valid target
     3. Ensure that DNS is set to a valid local DNS if your backend services are pointing to domain names
+
+Run either application using a default debugger or `dotnet run`. 
